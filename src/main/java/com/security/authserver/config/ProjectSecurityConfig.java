@@ -1,4 +1,4 @@
-package com.security.authserver;
+package com.security.authserver.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ import org.springframework.security.config.Customizer;
 import javax.sql.DataSource;
 
 @Configuration
-public class SecurityConfig {
+public class ProjectSecurityConfig {
 
     @Bean
     @Order(2147483642)
@@ -45,10 +45,10 @@ public class SecurityConfig {
 //         return new InMemoryUserDetailsManager(admin,user);
 //     }
 
-    @Bean
-    UserDetailsService jdbcUserDetailService(DataSource dataSource){
-        return new JdbcUserDetailsManager(dataSource);
-    }
+    // @Bean
+    // UserDetailsService jdbcUserDetailService(DataSource dataSource){
+    //     return new JdbcUserDetailsManager(dataSource);
+    // }
 
     @Bean 
     PasswordEncoder passwordEncoder(){
