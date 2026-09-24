@@ -1,5 +1,9 @@
 package com.security.authserver.model;
 
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +18,10 @@ public class Customer {
     private long id;
     private String email;
     private String pwd;
-    @Column(name = "role")
-    private String role;
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<Authority> authorities;
 
 
 }

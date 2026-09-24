@@ -26,3 +26,27 @@ CREATE TABLE customer (
 
 INSERT  INTO customer ( email, pwd, role) VALUES ('user@example.com', '{noop}password', 'read');
 INSERT  INTO customer ( email, pwd, role) VALUES ('admin@example.com', '{bcrypt}{bcrypt}$2a$12$oJlx823VQvE7u7nB/v3Z9ONWQ9Q2D.Zg/smpGb3TgqG2UM1P9zhVq', 'admin');
+
+
+-- auhtorities
+drop table authorities;
+
+CREATE TABLE authorities (
+  id BIGSERIAL PRIMARY KEY,
+  customer_id INT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  CONSTRAINT authorities_ibfk_1 FOREIGN KEY (customer_id) REFERENCES customer (id)
+);
+
+CREATE INDEX idx_authorities_customer_id ON authorities (customer_id);
+
+
+INSERT INTO authorities (customer_id, name)
+  VALUES (1, 'ROLE_USER');
+
+INSERT INTO authorities (customer_id, name)
+  VALUES (1, 'ROLE_ADMIN');
+
+  
+INSERT INTO authorities (customer_id, name)
+  VALUES (2, 'ROLE_ADMIN');

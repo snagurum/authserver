@@ -51,8 +51,13 @@ public class ProjectSecurityConfig {
             .authorizeHttpRequests((requests) ->
                 requests
                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                    .requestMatchers("/welcome","/test1","/test2").authenticated()
                     .requestMatchers("/help","/error","/login").permitAll()
+                      /*.requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
+                        .requestMatchers("/myBalance").hasAnyAuthority("VIEWBALANCE", "VIEWACCOUNT")*/
+                        .requestMatchers("/test2").hasRole("ADMIN")
+                        .requestMatchers("/test1").hasAnyRole("USER")
+                        .requestMatchers("/user").authenticated()
+                    .requestMatchers("/welcome","/test1","/test2").authenticated()
                 );
 
             // http.formLogin(flc -> flc.disable());
